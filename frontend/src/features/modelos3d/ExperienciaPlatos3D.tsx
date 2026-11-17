@@ -157,14 +157,16 @@ export function ExperienciaPlatos3D({ seleccion, onSeleccion, titulo, className 
     if (seleccion === undefined) setInterno(siguiente.id)
     onSeleccion?.(siguiente.id)
 
-    const boton = tiraRef.current?.querySelector<HTMLButtonElement>(
-      `[data-modelo="${siguiente.id}"]`,
-    )
-    boton?.scrollIntoView({
-      behavior: reducido ? 'auto' : 'smooth',
-      block: 'nearest',
-      inline: 'center',
-    })
+    // Se centra la miniatura moviendo SOLO la tira. `scrollIntoView` movería también la
+    // sección (que recorta con overflow) y la dejaría corrida a un lado.
+    const tira = tiraRef.current
+    const boton = tira?.querySelector<HTMLButtonElement>(`[data-modelo="${siguiente.id}"]`)
+    if (tira && boton && tira.scrollWidth > tira.clientWidth) {
+      tira.scrollTo({
+        left: boton.offsetLeft - (tira.clientWidth - boton.clientWidth) / 2,
+        behavior: reducido ? 'auto' : 'smooth',
+      })
+    }
     if (enfocar) boton?.focus({ preventScroll: true })
   }
 
@@ -203,7 +205,7 @@ export function ExperienciaPlatos3D({ seleccion, onSeleccion, titulo, className 
       ref={seccionRef}
       id="platos-3d"
       aria-labelledby="platos-3d-titulo"
-      className={cn('relative isolate scroll-mt-16 overflow-hidden bg-background', className)}
+      className={cn('relative isolate scroll-mt-16 overflow-clip bg-background', className)}
     >
       {/* Ambiente: la foto del plato, enorme y desenfocada, tiñe el escenario de su color. */}
       <AnimatePresence initial={false}>

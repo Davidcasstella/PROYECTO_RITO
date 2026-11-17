@@ -30,7 +30,7 @@ export const siteConfig = {
   firma: 'Cada experiencia es un nuevo rito.',
 
   /** URL pública, para las etiquetas de compartir. Se cambia al tener dominio propio. */
-  url: 'https://proyecto-rito.vercel.app',
+  url: 'https://proyectorito-c7sh.vercel.app',
 
   /** Navegación principal. Cada entrada es una página con su propia URL. */
   nav: [
