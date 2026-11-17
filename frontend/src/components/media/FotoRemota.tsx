@@ -6,13 +6,15 @@ type FotoRemotaProps = ImgHTMLAttributes<HTMLImageElement> & {
   respaldo?: string
   /** Si se da, la imagen va dentro de un marco con estas clases, que también se oculta. */
   marco?: string
+  /** Avisa cuando la foto remota falla (por ejemplo, para cambiar el pie de foto). */
+  onFallo?: () => void
 }
 
 /**
  * Imagen que viene de otra web (la galería oficial de RITO). Si esa web no responde o
  * cambia el archivo, se cambia por una foto local o se oculta, en vez de dejar un icono roto.
  */
-export function FotoRemota({ src, respaldo, marco, alt, ...props }: FotoRemotaProps) {
+export function FotoRemota({ src, respaldo, marco, alt, onFallo, ...props }: FotoRemotaProps) {
   const [fallo, setFallo] = useState(false)
   if (fallo && !respaldo) return null
   const img = (
@@ -20,7 +22,11 @@ export function FotoRemota({ src, respaldo, marco, alt, ...props }: FotoRemotaPr
       {...props}
       src={fallo && respaldo ? respaldo : src}
       alt={alt}
-      onError={() => setFallo(true)}
+      onError={() => {
+        if (fallo) return
+        setFallo(true)
+        onFallo?.()
+      }}
     />
   )
   return marco ? <div className={marco}>{img}</div> : img

@@ -8,7 +8,7 @@
  * Fotos: las de la web oficial ritogastrobar.com (ver `features/media/media.ts`).
  * Modelos 3D: `modelo` apunta a un id de `features/modelos3d/modelos.ts`.
  */
-import { fotoWeb } from '@/features/media/media'
+import { fotoPexels, fotoWeb, referencias } from '@/features/media/media'
 
 /** Un plato o bebida con precio único. */
 export type Dish = {
@@ -25,9 +25,11 @@ export type Dish = {
   destacado?: boolean
   /** Id del modelo 3D, si lo tiene. */
   modelo?: string
-  /** Foto real del plato. */
+  /** Foto real del plato (de la web oficial). */
   foto?: string
   alt?: string
+  /** `true` si `foto` es de referencia (Pexels), no del plato de RITO. */
+  referencia?: boolean
   notas?: string[]
 }
 
@@ -48,6 +50,8 @@ export type Seccion =
       titulo: string
       intro?: string
       tipo: 'lista'
+      /** Foto de referencia de la sección (se rellena sola desde `referencias`). */
+      imagen?: string
       /** Encabezados de las columnas de precio, si hay más de una (Sencillo · Doble). */
       columnas?: string[]
       items: { name: string; detalle?: string; precios: (number | null)[] }[]
@@ -58,6 +62,7 @@ export type Seccion =
       titulo: string
       intro?: string
       tipo: 'licores'
+      imagen?: string
       items: Licor[]
       pie?: string[]
     }
@@ -80,7 +85,7 @@ const ACOMPANAMIENTOS = [
   'Ensalada de temporada',
 ]
 
-export const carta: Grupo[] = [
+const cartaBase: Grupo[] = [
   {
     id: 'cocina',
     titulo: 'Cocina',
@@ -818,6 +823,33 @@ export const carta: Grupo[] = [
     ],
   },
 ]
+
+/**
+ * La carta lista para mostrar: cada plato o sección sin foto propia recibe su foto de
+ * referencia de Pexels (ver `features/media/media.ts`).
+ */
+export const carta: Grupo[] = cartaBase.map((grupo) => ({
+  ...grupo,
+  secciones: grupo.secciones.map((seccion): Seccion => {
+    if (seccion.tipo === 'platos') {
+      return {
+        ...seccion,
+        items: seccion.items.map((plato) => {
+          const ref = referencias[plato.id]
+          if (plato.foto || !ref) return plato
+          return {
+            ...plato,
+            foto: fotoPexels(ref),
+            alt: `Foto de referencia de un plato similar a: ${plato.name}.`,
+            referencia: true,
+          }
+        }),
+      }
+    }
+    const ref = referencias[seccion.id]
+    return ref ? { ...seccion, imagen: fotoPexels(ref, 1000) } : seccion
+  }),
+}))
 
 /** Todos los platos con ficha (los de las secciones de tipo `platos`). */
 export const platos: Dish[] = carta.flatMap((g) =>

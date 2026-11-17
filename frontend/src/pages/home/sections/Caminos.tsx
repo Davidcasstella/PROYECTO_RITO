@@ -1,3 +1,4 @@
+import { Linea } from '@/components/motion/Linea'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router'
 import { Reveal } from '@/components/motion/Reveal'
@@ -35,7 +36,10 @@ export function Caminos() {
       <Container>
         <Reveal className="max-w-2xl">
           <Eyebrow tono="amber">Sigue subiendo</Eyebrow>
-          <h2 className="mt-6 font-display text-h2 text-foreground">Todo lo que pasa en RITO</h2>
+          <h2 className="mt-6 font-display text-h2 text-foreground">
+            <Linea>Todo lo que pasa</Linea>
+            <Linea delay={0.1}>en RITO</Linea>
+          </h2>
         </Reveal>
 
         <ul className="mt-14 grid gap-5 md:grid-cols-3">

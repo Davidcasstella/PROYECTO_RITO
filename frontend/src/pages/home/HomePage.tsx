@@ -1,4 +1,6 @@
+import { Cinta } from '@/components/motion/Cinta'
 import { siteConfig } from '@/config/site'
+import { platos } from '@/features/menu/menu'
 import { useDocumentMeta } from '@/hooks/useDocumentMeta'
 import { ExperienciaPlatos3D } from '@/features/modelos3d/ExperienciaPlatos3D'
 import { Agenda } from '@/pages/home/sections/Agenda'
@@ -24,6 +26,13 @@ export function HomePage() {
     <>
       <Portada />
       <Ritual />
+      <Cinta
+        palabras={platos
+          .filter((p) => !p.referencia || p.destacado || p.modelo)
+          .slice(0, 18)
+          .map((p) => p.name)}
+        className="border-y border-border bg-background py-6 font-display text-[clamp(1.6rem,1.2rem+1.6vw,2.6rem)] text-foreground/85 italic"
+      />
       <LoQueSeSirve />
       <ExperienciaPlatos3D />
       <Vista />

@@ -1,13 +1,16 @@
+import { Linea } from '@/components/motion/Linea'
 import { Download, MessageCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import { Sol } from '@/components/layout/Sol'
+import { FotoParalaje } from '@/components/media/FotoParalaje'
 import { FotoRemota } from '@/components/media/FotoRemota'
+import { Cinta } from '@/components/motion/Cinta'
 import { Reveal } from '@/components/motion/Reveal'
 import { Container } from '@/components/ui/Container'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { siteConfig, whatsappHref } from '@/config/site'
-import { carta, formatPrice, type Seccion } from '@/features/menu/menu'
+import { carta, formatPrice, platos, type Seccion } from '@/features/menu/menu'
 import { TarjetaPlato } from '@/features/menu/TarjetaPlato'
 import { ExperienciaPlatos3D } from '@/features/modelos3d/ExperienciaPlatos3D'
 import { modelos3d } from '@/features/modelos3d/modelos'
@@ -49,7 +52,12 @@ export function MenuPage() {
         <Container>
           <Eyebrow tono="amber">La carta</Eyebrow>
           <h1 className="mt-7 max-w-3xl font-display text-display text-foreground">
-            Ascenso <em className="texto-laton">a los sabores</em>
+            <Linea alMontar delay={0.3}>
+              Ascenso
+            </Linea>
+            <Linea alMontar delay={0.42}>
+              <em className="texto-laton">a los sabores</em>
+            </Linea>
           </h1>
           <p className="mt-6 max-w-xl text-lead text-muted-foreground">
             Nuestra cocina teje historias con cada plato, mezclando tradición y modernidad en un
@@ -102,25 +110,30 @@ export function MenuPage() {
 
       <ExperienciaPlatos3D seleccion={plato3d} onSeleccion={setPlato3d} />
 
+      <Cinta
+        palabras={platos.filter((p) => p.destacado || p.modelo).map((p) => p.name)}
+        inverso
+        className="border-y border-border bg-background py-5 font-display text-[clamp(1.4rem,1.1rem+1.2vw,2.2rem)] text-foreground/85 italic"
+      />
+
       {carta.map((grupo) => (
         <div key={grupo.id} id={grupo.id}>
-          {/* Portada del grupo */}
-          <header className="relative isolate flex min-h-[48svh] items-end overflow-hidden">
-            <FotoRemota
-              src={grupo.imagen}
-              respaldo="/images/salon-rito.webp"
-              alt={grupo.imagenAlt}
-              loading="lazy"
-              className="absolute inset-0 -z-20 size-full object-cover"
-            />
+          {/* Portada del grupo: foto con paralaje y el título que sube */}
+          <header className="relative isolate flex min-h-[62svh] items-end overflow-hidden">
+            <FotoParalaje src={grupo.imagen} alt={grupo.imagenAlt} intensidad={10} />
             <div
               aria-hidden="true"
-              className="absolute inset-0 -z-10 bg-linear-to-t from-background via-background/55 to-background/15"
+              className="absolute inset-0 -z-10 bg-linear-to-t from-background via-background/50 to-background/10"
             />
-            <Container className="py-12">
-              <Reveal>
-                <h2 className="font-display text-h2 text-foreground">{grupo.titulo}</h2>
-                <p className="mt-3 max-w-xl text-lead text-foreground/85 italic">{grupo.frase}</p>
+            <Container className="py-14">
+              <p className="text-eyebrow text-amber uppercase">
+                {String(carta.indexOf(grupo) + 1).padStart(2, '0')} · La carta
+              </p>
+              <h2 className="mt-4 font-display text-[clamp(3rem,1.6rem+5vw,6.5rem)] leading-none text-foreground">
+                <Linea>{grupo.titulo}</Linea>
+              </h2>
+              <Reveal delay={0.15}>
+                <p className="mt-4 max-w-xl text-lead text-foreground/85 italic">{grupo.frase}</p>
               </Reveal>
             </Container>
           </header>
@@ -136,8 +149,9 @@ export function MenuPage() {
       <section className="bg-marmol py-14 text-ink">
         <Container className="flex flex-wrap items-center justify-between gap-6">
           <p className="max-w-xl text-sm text-ink-muted">
-            Precios en pesos colombianos. La propina es voluntaria. El menú del día cambia a diario:
-            pregúntalo por WhatsApp. Los platos marcados con{' '}
+            Precios en pesos colombianos. La propina es voluntaria. Las fotos marcadas «de
+            referencia» son de Pexels e ilustran el tipo de plato; no son los platos de RITO. El
+            menú del día cambia a diario: pregúntalo por WhatsApp. Los platos marcados con{' '}
             <Sol className="inline size-4 align-[-2px] text-accent-ink" /> son recomendados de la
             casa.
           </p>
@@ -176,90 +190,108 @@ function SeccionCarta({ seccion, onVer3D }: { seccion: Seccion; onVer3D: (id: st
 
         {seccion.tipo === 'platos' ? (
           <ul className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {seccion.items.map((plato) => (
+            {seccion.items.map((plato, i) => (
               <li key={plato.id}>
-                <TarjetaPlato plato={plato} onVer3D={plato.modelo ? onVer3D : undefined} />
+                <Reveal delay={(i % 3) * 0.08} className="h-full">
+                  <TarjetaPlato plato={plato} onVer3D={plato.modelo ? onVer3D : undefined} />
+                </Reveal>
               </li>
             ))}
           </ul>
         ) : null}
 
-        {seccion.tipo === 'lista' ? (
-          <div className="mt-8 max-w-3xl">
-            {seccion.columnas ? (
-              <div className="flex justify-end gap-6 pb-2 text-eyebrow text-ink-muted uppercase">
-                {seccion.columnas.map((c) => (
-                  <span key={c} className="w-20 text-right">
-                    {c}
-                  </span>
-                ))}
-              </div>
-            ) : null}
-            <ul className="divide-y divide-ink/10 border-y border-ink/10">
-              {seccion.items.map((item) => (
-                <li key={item.name} className="flex items-baseline gap-4 py-3.5">
-                  <div className="flex-1">
-                    <p className="text-[1.02rem] text-ink">{item.name}</p>
-                    {item.detalle ? (
-                      <p className="mt-0.5 text-sm text-ink-muted">{item.detalle}</p>
-                    ) : null}
-                  </div>
-                  <div className="flex gap-6">
-                    {item.precios.map((p, i) => (
-                      <span
-                        key={i}
-                        className={cn(
-                          'tabular w-20 text-right font-display text-[1.15rem]',
-                          p === null ? 'text-ink-muted/50' : 'text-accent-ink',
-                        )}
+        {seccion.tipo !== 'platos' ? (
+          <div className="mt-8 grid grid-cols-1 items-start gap-10 *:min-w-0 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-14">
+            {seccion.imagen ? (
+              <Reveal from="right" className="lg:sticky lg:top-40">
+                <FotoSeccion src={seccion.imagen} />
+              </Reveal>
+            ) : (
+              <div aria-hidden="true" />
+            )}
+            <div>
+              {seccion.tipo === 'lista' ? (
+                <div className="max-w-3xl">
+                  {seccion.columnas ? (
+                    <div className="flex justify-end gap-6 pb-2 text-eyebrow text-ink-muted uppercase">
+                      {seccion.columnas.map((c) => (
+                        <span key={c} className="w-20 text-right">
+                          {c}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+                  <ul className="divide-y divide-ink/10 border-y border-ink/10">
+                    {seccion.items.map((item) => (
+                      <li
+                        key={item.name}
+                        className="flex items-baseline gap-4 py-3.5 transition-[padding,background-color] duration-300 ease-luxe hover:bg-marmol/70 hover:px-3"
                       >
-                        {p === null ? '—' : formatPrice(p)}
-                      </span>
+                        <div className="flex-1">
+                          <p className="text-[1.02rem] text-ink">{item.name}</p>
+                          {item.detalle ? (
+                            <p className="mt-0.5 text-sm text-ink-muted">{item.detalle}</p>
+                          ) : null}
+                        </div>
+                        <div className="flex gap-6">
+                          {item.precios.map((p, i) => (
+                            <span
+                              key={i}
+                              className={cn(
+                                'tabular w-20 text-right font-display text-[1.15rem]',
+                                p === null ? 'text-ink-muted/50' : 'text-accent-ink',
+                              )}
+                            >
+                              {p === null ? '—' : formatPrice(p)}
+                            </span>
+                          ))}
+                        </div>
+                      </li>
                     ))}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
+                  </ul>
+                </div>
+              ) : null}
 
-        {seccion.tipo === 'licores' ? (
-          <div className="mt-8 max-w-4xl overflow-x-auto">
-            <table className="w-full min-w-[34rem] text-left">
-              <caption className="sr-only">Precios de {seccion.titulo}</caption>
-              <thead>
-                <tr className="text-eyebrow text-ink-muted uppercase">
-                  <th scope="col" className="pb-2 font-medium">
-                    Referencia
-                  </th>
-                  {['Shot', 'Media', 'Botella'].map((c) => (
-                    <th key={c} scope="col" className="w-28 pb-2 text-right font-medium">
-                      {c}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-ink/10 border-y border-ink/10">
-                {seccion.items.map((l) => (
-                  <tr key={l.name}>
-                    <th scope="row" className="py-3 pr-4 text-[1rem] font-normal text-ink">
-                      {l.name}
-                    </th>
-                    {[l.shot, l.media, l.botella].map((p, i) => (
-                      <td
-                        key={i}
-                        className={cn(
-                          'tabular py-3 text-right font-display text-[1.1rem]',
-                          p ? 'text-accent-ink' : 'text-ink-muted/50',
-                        )}
-                      >
-                        {p ? formatPrice(p) : '—'}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+              {seccion.tipo === 'licores' ? (
+                <div className="max-w-4xl overflow-x-auto">
+                  <table className="w-full min-w-[34rem] text-left">
+                    <caption className="sr-only">Precios de {seccion.titulo}</caption>
+                    <thead>
+                      <tr className="text-eyebrow text-ink-muted uppercase">
+                        <th scope="col" className="pb-2 font-medium">
+                          Referencia
+                        </th>
+                        {['Shot', 'Media', 'Botella'].map((c) => (
+                          <th key={c} scope="col" className="w-28 pb-2 text-right font-medium">
+                            {c}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-ink/10 border-y border-ink/10">
+                      {seccion.items.map((l) => (
+                        <tr key={l.name}>
+                          <th scope="row" className="py-3 pr-4 text-[1rem] font-normal text-ink">
+                            {l.name}
+                          </th>
+                          {[l.shot, l.media, l.botella].map((p, i) => (
+                            <td
+                              key={i}
+                              className={cn(
+                                'tabular py-3 text-right font-display text-[1.1rem]',
+                                p ? 'text-accent-ink' : 'text-ink-muted/50',
+                              )}
+                            >
+                              {p ? formatPrice(p) : '—'}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : null}
+            </div>
           </div>
         ) : null}
 
@@ -270,5 +302,26 @@ function SeccionCarta({ seccion, onVer3D }: { seccion: Seccion; onVer3D: (id: st
         ))}
       </Container>
     </section>
+  )
+}
+
+/** Foto de referencia de una sección; si no carga, queda una foto del bar de RITO. */
+function FotoSeccion({ src }: { src: string }) {
+  const [local, setLocal] = useState(false)
+  return (
+    <figure className="group overflow-hidden rounded-sm">
+      <FotoRemota
+        marco="aspect-4/5 overflow-hidden bg-marmol"
+        src={src}
+        respaldo="/images/salon-barra-sm.webp"
+        onFallo={() => setLocal(true)}
+        alt=""
+        loading="lazy"
+        className="size-full object-cover transition-transform duration-[1.4s] ease-luxe group-hover:scale-105 motion-reduce:transition-none"
+      />
+      <figcaption className="mt-2 text-[0.75rem] text-ink-muted">
+        {local ? 'El bar de RITO, Sogamoso' : 'Foto de referencia'}
+      </figcaption>
+    </figure>
   )
 }

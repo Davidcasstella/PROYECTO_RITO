@@ -1,3 +1,4 @@
+import { Linea } from '@/components/motion/Linea'
 import { FotoRevelada } from '@/components/media/FotoRevelada'
 import { Reveal } from '@/components/motion/Reveal'
 import { ArrowLink } from '@/components/ui/ArrowLink'
@@ -33,7 +34,11 @@ export function Ritual() {
             <Eyebrow>Cocina &amp; terraza</Eyebrow>
 
             <h2 className="mt-7 font-display text-h2">
-              Un ritual que <em>se sube</em> por las escaleras
+              <Linea>Un ritual que</Linea>
+              <Linea delay={0.1}>
+                <em>se sube</em> por las
+              </Linea>
+              <Linea delay={0.2}>escaleras</Linea>
             </h2>
 
             <p className="mt-6 text-lead text-ink-muted">

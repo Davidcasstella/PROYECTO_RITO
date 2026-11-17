@@ -20,19 +20,31 @@ export function TarjetaPlato({ plato, onVer3D }: Props) {
     <article
       className={cn(
         'group relative flex h-full flex-col overflow-hidden rounded-sm bg-marmol ring-1 ring-ink/10',
-        'transition-[box-shadow,translate] duration-500 ease-luxe hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/10 motion-reduce:hover:translate-y-0',
+        'transition-[box-shadow,translate] duration-500 ease-luxe hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-accent-ink/20 hover:ring-accent-ink/40 motion-reduce:hover:translate-y-0',
       )}
     >
       {plato.foto ? (
-        <FotoRemota
-          marco="aspect-4/3 overflow-hidden bg-marmol-deep"
-          src={plato.foto}
-          alt={plato.alt ?? plato.name}
-          loading="lazy"
-          width={800}
-          height={600}
-          className="size-full object-cover transition-transform duration-700 ease-luxe group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-        />
+        <div className="relative">
+          <FotoRemota
+            marco="aspect-4/3 overflow-hidden bg-marmol-deep"
+            src={plato.foto}
+            alt={plato.alt ?? plato.name}
+            loading="lazy"
+            width={800}
+            height={600}
+            className="size-full object-cover transition-[scale,filter] duration-[1.2s] ease-luxe group-hover:scale-110 group-hover:saturate-125 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+          />
+          {/* Brillo de latón que cruza la foto al pasar el ratón */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-[1.1s] ease-luxe group-hover:translate-x-full motion-reduce:hidden"
+          />
+          {plato.referencia ? (
+            <span className="absolute bottom-2 left-2 rounded-full bg-ink/70 px-2.5 py-1 text-[0.65rem] tracking-[0.12em] text-marmol uppercase backdrop-blur">
+              Foto de referencia
+            </span>
+          ) : null}
+        </div>
       ) : null}
 
       <div className="flex flex-1 flex-col p-6">
@@ -72,7 +84,9 @@ export function TarjetaPlato({ plato, onVer3D }: Props) {
         ) : null}
 
         <div className="mt-auto flex items-end justify-between gap-4 pt-5">
-          <p className="tabular font-display text-[1.3rem] text-accent-ink">{precioDe(plato)}</p>
+          <p className="tabular relative font-display text-[1.3rem] text-accent-ink after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent-ink after:transition-transform after:duration-500 group-hover:after:scale-x-100">
+            {precioDe(plato)}
+          </p>
           {onVer3D && plato.modelo ? (
             <button
               type="button"

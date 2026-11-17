@@ -1,3 +1,4 @@
+import { Linea } from '@/components/motion/Linea'
 import { Link } from 'react-router'
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from '@/components/motion/Reveal'
@@ -18,7 +19,10 @@ export function LoQueSeSirve() {
           <Reveal className="lg:sticky lg:top-32 lg:self-start">
             <Eyebrow tono="amber">La carta</Eyebrow>
             <h2 className="mt-7 font-display text-h2 text-foreground">
-              Lo que <em className="texto-laton">se sirve</em> arriba
+              <Linea>
+                Lo que <em className="texto-laton">se sirve</em>
+              </Linea>
+              <Linea delay={0.1}>arriba</Linea>
             </h2>
             <p className="mt-6 max-w-sm text-lead text-muted-foreground">
               Cortes madurados al fuego, burgers, sabores mexicanos, postres y una barra donde cada

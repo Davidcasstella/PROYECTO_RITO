@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 /**
  * Avisa de cuándo se ha retirado la pantalla de carga.
  *
@@ -24,4 +26,11 @@ export function alEstarListaLaEntrada(avisar: () => void) {
   }
   enEspera.add(avisar)
   return () => enEspera.delete(avisar)
+}
+
+/** `true` en cuanto se retira la pantalla de carga (o si nunca la hubo). */
+export function useEntradaLista() {
+  const [listaYa, setListaYa] = useState(lista)
+  useEffect(() => alEstarListaLaEntrada(() => setListaYa(true)), [])
+  return listaYa
 }

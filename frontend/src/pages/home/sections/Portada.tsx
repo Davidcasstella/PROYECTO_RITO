@@ -6,8 +6,10 @@ import { VideoFondo } from '@/components/media/VideoFondo'
 import { ButtonLink } from '@/components/ui/ButtonLink'
 import { Container } from '@/components/ui/Container'
 import { EstadoAhora } from '@/components/ui/EstadoAhora'
+import { Linea } from '@/components/motion/Linea'
 import { siteConfig } from '@/config/site'
 import { videos } from '@/features/media/media'
+import { useEntradaLista } from '@/lib/entrada'
 
 /**
  * Portada: la vista desde la terraza, a pantalla completa.
@@ -20,6 +22,7 @@ import { videos } from '@/features/media/media'
 export function Portada() {
   const ref = useRef<HTMLElement>(null)
   const reducido = useReducedMotion()
+  const lista = useEntradaLista()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const yFoto = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
   const opacidadTexto = useTransform(scrollYProgress, [0, 0.6], [1, 0])
@@ -61,9 +64,12 @@ export function Portada() {
           </p>
 
           <h1 className="mt-7 max-w-4xl font-display text-display text-foreground">
-            Donde la ciudad
-            <br />
-            <em className="texto-laton">se ve distinta</em>
+            <Linea alMontar activa={lista} delay={0.1}>
+              Donde la ciudad
+            </Linea>
+            <Linea alMontar activa={lista} delay={0.25}>
+              <em className="texto-laton">se ve distinta</em>
+            </Linea>
           </h1>
 
           <p className="mt-7 max-w-lg text-lead text-muted-foreground">

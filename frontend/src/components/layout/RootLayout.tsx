@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router'
+import { BarraProgreso } from '@/components/layout/BarraProgreso'
 import { Loader } from '@/components/layout/Loader'
 import { SiteFooter } from '@/components/layout/SiteFooter'
 import { SiteHeader } from '@/components/layout/SiteHeader'
+import { TelonRuta } from '@/components/layout/TelonRuta'
 import { marcarEntradaLista } from '@/lib/entrada'
 import { ScrollTrigger } from '@/lib/gsap'
 
@@ -54,10 +56,16 @@ export function RootLayout() {
         Saltar al contenido
       </a>
 
+      <BarraProgreso />
       <SiteHeader />
+      <TelonRuta />
 
       {/* La clave reinicia la transición en cada ruta: un fundido corto y discreto. */}
-      <main id="contenido" key={location.pathname} className="animate-[pagina_320ms_ease-out]">
+      <main
+        id="contenido"
+        key={location.pathname}
+        className="animate-[pagina_600ms_ease-out_250ms_both] motion-reduce:animate-none"
+      >
         <Outlet />
       </main>
 

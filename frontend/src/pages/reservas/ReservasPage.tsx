@@ -1,3 +1,4 @@
+import { Linea } from '@/components/motion/Linea'
 import { Clock, MapPin, MessageCircle, Timer } from 'lucide-react'
 import { Reveal } from '@/components/motion/Reveal'
 import { Container } from '@/components/ui/Container'
@@ -37,7 +38,12 @@ export function ReservasPage() {
         <Container>
           <Eyebrow tono="amber">Reservas</Eyebrow>
           <h1 className="mt-7 max-w-3xl font-display text-display text-foreground">
-            Tu mesa, <em className="texto-laton">a la altura</em>
+            <Linea alMontar delay={0.3}>
+              Tu mesa,
+            </Linea>
+            <Linea alMontar delay={0.42}>
+              <em className="texto-laton">a la altura</em>
+            </Linea>
           </h1>
           <p className="mt-6 max-w-xl text-lead text-muted-foreground">
             Elige el día, la hora y cuántos vienen. Te dejamos el mensaje listo para enviarlo por

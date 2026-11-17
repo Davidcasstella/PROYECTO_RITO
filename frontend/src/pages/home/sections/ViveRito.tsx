@@ -1,3 +1,4 @@
+import { Linea } from '@/components/motion/Linea'
 import { Pause, Play } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { Reveal } from '@/components/motion/Reveal'
@@ -19,7 +20,10 @@ export function ViveRito() {
           <div>
             <Eyebrow tono="amber">Vive el rito</Eyebrow>
             <h2 className="mt-6 max-w-2xl font-display text-h2 text-foreground">
-              Del primer bocado <em className="texto-laton">a la última canción</em>
+              <Linea>Del primer bocado</Linea>
+              <Linea delay={0.1}>
+                <em className="texto-laton">a la última canción</em>
+              </Linea>
             </h2>
           </div>
           <p className="max-w-xs text-sm text-muted-foreground">

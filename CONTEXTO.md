@@ -131,3 +131,14 @@ restaurante italiano. Cuando lleguen:
   - **Pendiente**: comprobar en producción que ritogastrobar.com deja cargar sus fotos y
     videos desde otra web; si no, descargarlos a `frontend/public/rito/` y cambiar `ORIGEN`
     en `features/media/media.ts`.
+
+- 2026-11-17 (3): **más movimiento y fotos en toda la carta**.
+  - Fotos de referencia de Pexels (licencia libre, enlazadas desde su CDN) en cada plato que
+    no tenía foto propia y en las secciones de bebidas y licores. Lista en `referencias`
+    (`features/media/media.ts`); cada una lleva la etiqueta "Foto de referencia" y la carta
+    lo explica al final. Si Pexels no responde, la sección muestra una foto local del bar.
+  - Transiciones nuevas: telón dorado al cambiar de página (`TelonRuta`), barra de progreso
+    del scroll (`BarraProgreso`), títulos que suben línea a línea (`Linea`), cinta de
+    nombres de platos con botón de pausa (`Cinta`), cabeceras de grupo con paralaje,
+    tarjetas que entran escalonadas y brillo/zoom al pasar el ratón.
+  - Todo respeta `prefers-reduced-motion`.

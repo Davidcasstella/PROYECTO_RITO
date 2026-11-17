@@ -1,3 +1,4 @@
+import { Linea } from '@/components/motion/Linea'
 import { AtSign, Clock, MapPin, MessageCircle, Navigation } from 'lucide-react'
 import { Link } from 'react-router'
 import { Reveal } from '@/components/motion/Reveal'
@@ -41,7 +42,12 @@ export function ContactoPage() {
         <Container>
           <Eyebrow tono="amber">Contacto</Eyebrow>
           <h1 className="mt-7 max-w-3xl font-display text-display text-foreground">
-            Te esperamos <em className="texto-laton">arriba</em>
+            <Linea alMontar delay={0.3}>
+              Te esperamos
+            </Linea>
+            <Linea alMontar delay={0.42}>
+              <em className="texto-laton">arriba</em>
+            </Linea>
           </h1>
           <p className="mt-6 max-w-xl text-lead text-muted-foreground">
             En la Carrera 10, frente a la plaza. Escríbenos por WhatsApp o deja tu mensaje y te

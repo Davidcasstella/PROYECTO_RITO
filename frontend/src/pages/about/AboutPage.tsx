@@ -1,3 +1,4 @@
+import { Linea } from '@/components/motion/Linea'
 import { Reveal } from '@/components/motion/Reveal'
 import { FotoParalaje } from '@/components/media/FotoParalaje'
 import { FotoRevelada } from '@/components/media/FotoRevelada'
@@ -89,7 +90,12 @@ export function AboutPage() {
         <Container className="pt-40 pb-16 sm:pb-24">
           <Eyebrow tono="amber">El rooftop</Eyebrow>
           <h1 className="mt-7 max-w-4xl font-display text-display text-foreground">
-            Subir es parte <em className="texto-laton">del ritual</em>
+            <Linea alMontar delay={0.3}>
+              Subir es parte
+            </Linea>
+            <Linea alMontar delay={0.42}>
+              <em className="texto-laton">del ritual</em>
+            </Linea>
           </h1>
           <p className="mt-6 max-w-xl text-lead text-muted-foreground">
             Gastrobar y terraza frente a la plaza, en Sogamoso. Un lugar para brindar, comer bien y

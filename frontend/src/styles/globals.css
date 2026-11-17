@@ -89,7 +89,7 @@
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
   }
 
@@ -123,6 +123,39 @@
     }
     to {
       transform: scale(1);
+    }
+  }
+
+  /* Telón entre páginas: cubre un instante y se levanta hacia arriba. */
+  @keyframes telon {
+    0%,
+    30% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+
+  @keyframes telon-sol {
+    0% {
+      opacity: 0;
+      transform: scale(0.6) rotate(-40deg);
+    }
+    35% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.1) rotate(20deg);
+    }
+  }
+
+  /* Cinta de palabras que se desplaza sin fin (la segunda copia tapa el salto). */
+  @keyframes cinta {
+    to {
+      transform: translateX(-50%);
     }
   }
 

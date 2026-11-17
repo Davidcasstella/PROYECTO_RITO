@@ -1,3 +1,4 @@
+import { Linea } from '@/components/motion/Linea'
 import { AtSign, MapPin, MessageCircle } from 'lucide-react'
 import { NavLink } from 'react-router'
 import { Logo } from '@/components/layout/Logo'
@@ -41,7 +42,10 @@ export function SiteFooter() {
         <Container className="py-20 text-center sm:py-28">
           <Sol className="mx-auto size-10 text-accent" girando />
           <h2 className="mt-7 font-display text-h2 text-foreground">
-            El atardecer se ve <em className="texto-laton">mejor desde arriba</em>
+            <Linea>El atardecer se ve</Linea>
+            <Linea delay={0.12}>
+              <em className="texto-laton">mejor desde arriba</em>
+            </Linea>
           </h2>
           <p className="mx-auto mt-5 max-w-md text-muted-foreground">
             Reserva hasta las 8:00 p. m. y llega con tiempo: guardamos tu mesa 25 minutos.

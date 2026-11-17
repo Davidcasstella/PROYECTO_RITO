@@ -1,3 +1,4 @@
+import { Linea } from '@/components/motion/Linea'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { FotoRevelada } from '@/components/media/FotoRevelada'
@@ -81,7 +82,12 @@ export function GaleriaPage() {
         <Container>
           <Eyebrow tono="amber">Galería</Eyebrow>
           <h1 className="mt-7 max-w-3xl font-display text-display text-foreground">
-            Así se vive <em className="texto-laton">el rito</em>
+            <Linea alMontar delay={0.3}>
+              Así se vive
+            </Linea>
+            <Linea alMontar delay={0.42}>
+              <em className="texto-laton">el rito</em>
+            </Linea>
           </h1>
           <p className="mt-6 max-w-xl text-lead text-muted-foreground">
             La cocina de fuego, la barra, la terraza sobre la plaza y el salón de cuero y latón.
