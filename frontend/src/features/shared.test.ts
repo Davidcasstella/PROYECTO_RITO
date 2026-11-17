@@ -22,10 +22,19 @@ describe('horario', () => {
     expect(horaLegible('12:00')).toBe('12:00 m.')
     expect(horaLegible('20:30')).toBe('8:30 p. m.')
     expect(horaLegible('02:00')).toBe('2:00 a. m.')
+    expect(horaLegible('00:00')).toBe('12:00 medianoche')
   })
 
-  it('antes del mediodía está cerrado y abre a las 12', () => {
+  it('a las 10:00 a. m. de un martes ya está abierto y cierra a la medianoche', () => {
     expect(estadoAhora(martesManana)).toEqual({
+      abierto: true,
+      texto: 'Abierto · cierra a la medianoche',
+    })
+  })
+
+  it('el domingo por la mañana está cerrado y abre a las 12', () => {
+    // Domingo 22 a las 9:00 a. m. en Sogamoso = 14:00 UTC.
+    expect(estadoAhora(new Date('2026-11-22T14:00:00Z'))).toEqual({
       abierto: false,
       texto: 'Cerrado · abre hoy a las 12:00 m.',
     })
@@ -36,11 +45,13 @@ describe('horario', () => {
     expect(estadoAhora(new Date('2026-11-21T06:00:00Z')).abierto).toBe(true)
   })
 
-  it('las reservas van de 12:00 m. a 8:00 p. m., cada media hora', () => {
-    const horas = horasReservables('2026-11-20', martesManana)
-    expect(horas[0]).toBe('12:00')
-    expect(horas.at(-1)).toBe('20:00')
-    expect(horas).toHaveLength(17)
+  it('las reservas van de la apertura a las 8:00 p. m., cada media hora', () => {
+    const viernes = horasReservables('2026-11-20', martesManana)
+    expect(viernes[0]).toBe('10:00')
+    expect(viernes.at(-1)).toBe('20:00')
+    expect(viernes).toHaveLength(21)
+    // El domingo se abre a las 12.
+    expect(horasReservables('2026-11-22', martesManana)[0]).toBe('12:00')
   })
 
   it('para hoy solo ofrece horas que aún no han pasado', () => {

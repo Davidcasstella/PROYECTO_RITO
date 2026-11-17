@@ -81,10 +81,10 @@ export function GaleriaPage() {
         <Container>
           <Eyebrow tono="amber">Galería</Eyebrow>
           <h1 className="mt-7 max-w-3xl font-display text-display text-foreground">
-            RITO, <em className="texto-laton">a la luz del día</em>
+            Así se vive <em className="texto-laton">el rito</em>
           </h1>
           <p className="mt-6 max-w-xl text-lead text-muted-foreground">
-            La terraza sobre la plaza, el salón de cuero y latón y los detalles que lo hacen único.
+            La cocina de fuego, la barra, la terraza sobre la plaza y el salón de cuero y latón.
           </p>
         </Container>
       </section>
@@ -135,6 +135,7 @@ export function GaleriaPage() {
                     <FotoRevelada
                       src={foto.src}
                       alt={foto.alt}
+                      respaldo={foto.respaldo}
                       marcoClassName={cn(
                         'rounded-sm',
                         foto.ancha ? 'h-72 sm:h-72' : 'h-72 sm:h-64',
@@ -190,7 +191,7 @@ export function GaleriaPage() {
             >
               <img
                 key={abierta.id}
-                src={abierta.src}
+                src={abierta.src.replace('-800.webp', '-1600.webp')}
                 alt={abierta.alt}
                 className={cn(
                   'max-h-[78svh] w-full object-contain motion-reduce:animate-none',

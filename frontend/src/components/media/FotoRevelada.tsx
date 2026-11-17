@@ -9,6 +9,8 @@ type FotoReveladaProps = Omit<
 > & {
   /** Clases del marco (tamaño, bordes redondeados…). */
   marcoClassName?: string
+  /** Foto local de respaldo si `src` (por ejemplo, una foto de otra web) no carga. */
+  respaldo?: string
 }
 
 /**
@@ -21,7 +23,7 @@ type FotoReveladaProps = Omit<
  * El acercamiento al pasar el ratón lo pone quien la usa con `group-hover:scale-*`: la
  * propiedad `scale` de CSS se suma al `transform` de la animación sin pisarlo.
  */
-export function FotoRevelada({ marcoClassName, className, ...img }: FotoReveladaProps) {
+export function FotoRevelada({ marcoClassName, className, respaldo, ...img }: FotoReveladaProps) {
   const reducido = useReducedMotion()
   // Poco umbral: en los carruseles del celular la foto siguiente solo asoma por el borde y
   // tiene que verse ya, no como un hueco vacío.
@@ -39,6 +41,10 @@ export function FotoRevelada({ marcoClassName, className, ...img }: FotoRevelada
         loading="lazy"
         decoding="async"
         {...img}
+        onError={(e) => {
+          const foto = e.currentTarget
+          if (respaldo && !foto.src.endsWith(respaldo)) foto.src = respaldo
+        }}
         className={cn('size-full object-cover', className)}
         initial={reducido ? false : { scale: 1.16 }}
         whileInView={{ scale: 1 }}

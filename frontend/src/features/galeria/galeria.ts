@@ -1,8 +1,12 @@
+import { fotoWeb, fotosOficiales } from '@/features/media/media'
+
 /**
- * Fotografías de la galería. Todas son del propio local (carpeta PROYECTO_RITO del cliente).
- * Se dejaron fuera las dos donde salen personas de frente.
+ * Fotografías de la galería, todas del propio restaurante:
+ *  - las del local, de la carpeta PROYECTO_RITO del cliente (se dejaron fuera las dos donde
+ *    salen personas de frente);
+ *  - las de cocina y barra, de la galería de la web oficial ritogastrobar.com.
  */
-export type CategoriaGaleria = 'terraza' | 'salon' | 'detalles' | 'llegada'
+export type CategoriaGaleria = 'cocina' | 'terraza' | 'salon' | 'detalles' | 'llegada'
 
 export type FotoGaleria = {
   id: string
@@ -11,9 +15,12 @@ export type FotoGaleria = {
   categoria: CategoriaGaleria
   /** `true` = ocupa el doble de ancho en el mosaico de escritorio. */
   ancha?: boolean
+  /** Foto local por si la remota no carga. */
+  respaldo?: string
 }
 
 export const categoriasGaleria: { id: CategoriaGaleria; titulo: string }[] = [
+  { id: 'cocina', titulo: 'Cocina y barra' },
   { id: 'terraza', titulo: 'Terraza y vista' },
   { id: 'salon', titulo: 'Salón' },
   { id: 'detalles', titulo: 'Detalles' },
@@ -27,7 +34,17 @@ const foto = (
   ancha?: boolean,
 ): FotoGaleria => ({ id, src: `/images/${id}.webp`, alt, categoria, ancha })
 
+const oficiales: FotoGaleria[] = fotosOficiales.map((foto, i) => ({
+  id: foto.id,
+  src: fotoWeb(foto.id),
+  alt: foto.alt,
+  categoria: 'cocina',
+  ancha: i === 1 || i === 7,
+  respaldo: '/images/muro-rito-detalle.webp',
+}))
+
 export const galeria: FotoGaleria[] = [
+  ...oficiales,
   foto(
     'vista-sol',
     'terraza',

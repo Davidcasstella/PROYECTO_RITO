@@ -7,10 +7,14 @@
 
 ## No inventar datos
 
-Platos, precios, correo y Facebook **no existen todavía**. La carta muestra categorías reales
-(sacadas del Instagram) y, mientras no haya platos, ofrece pedirla por WhatsApp. Los datos que
-faltan van entre corchetes en `frontend/src/config/site.ts`. No hay fechas de fundación,
-premios, pisos del edificio ni nombres de personas: no se añaden.
+La carta (`features/menu/menu.ts`) es copia de la carta impresa del cliente
+(`carta-rito.pdf`): no se añaden platos ni precios que no estén ahí. Dirección, horario, correo
+y redes salen de la web oficial ritogastrobar.com. No hay fechas de fundación, premios ni
+nombres de personas: no se añaden.
+
+Los platos 3D son **modelos de muestra** (escaneos del proyecto de referencia) con nombres de
+platos reales: la web debe seguir diciendo "vista de muestra". Las fotos y videos de
+`features/media/media.ts` se cargan desde ritogastrobar.com, siempre con un respaldo local.
 
 ## Código
 

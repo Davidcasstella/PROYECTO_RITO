@@ -114,9 +114,7 @@ export function Loader({ onTerminar }: { onTerminar: () => void }) {
           <span className="texto-laton">RITO</span>
         </h1>
 
-        <p className="mt-3 text-eyebrow tracking-[0.5em] text-amber uppercase">
-          Rooftop · Gastrobar
-        </p>
+        <p className="mt-3 text-eyebrow tracking-[0.5em] text-amber uppercase">Cocina Rooftop</p>
 
         <div
           ref={barraRef}

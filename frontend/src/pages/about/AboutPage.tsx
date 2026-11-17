@@ -41,20 +41,24 @@ const recorrido = [
   },
 ]
 
+/** Experiencias, según la web oficial ritogastrobar.com. */
 const planes = [
   {
-    titulo: 'El almuerzo',
-    texto: 'Desde las 12 m., con la luz del día entrando por los ventanales.',
+    titulo: 'La terraza',
+    texto:
+      'Cocina de fuego bajo el cielo abierto: el cierre perfecto de un día en el Lago de Tota o en Monguí.',
   },
   {
-    titulo: 'El atardecer',
-    texto: 'Cócteles en la terraza mientras cae la tarde sobre la ciudad.',
+    titulo: 'Eventos privados',
+    texto:
+      'Cumpleaños, reuniones de empresa y celebraciones: nos encargamos de la comida, los cócteles y el ambiente.',
   },
-  { titulo: 'La noche larga', texto: 'Viernes y sábado, hasta las 2 a. m.' },
   {
-    titulo: 'La celebración',
-    texto: 'Cumpleaños, aniversarios y temporadas especiales con edición limitada.',
+    titulo: 'El ritual del fuego',
+    texto:
+      'Cata de mixología en la barra, con humo, brasas y sabores de Boyacá, preparada frente a ti.',
   },
+  { titulo: 'Las noches', texto: 'Viernes y sábado, DJ y cócteles hasta las 2 a. m.' },
 ]
 
 /**
@@ -91,6 +95,26 @@ export function AboutPage() {
             Gastrobar y terraza frente a la plaza, en Sogamoso. Un lugar para brindar, comer bien y
             mirar la ciudad desde otro ángulo.
           </p>
+        </Container>
+      </section>
+
+      {/* Manifiesto: el texto de la propia carta */}
+      <section className="listones py-20 sm:py-28">
+        <Container className="max-w-3xl text-center">
+          <Reveal>
+            <Sol className="mx-auto size-14 text-accent" girando />
+            <h2 className="mt-8 text-eyebrow tracking-[0.5em] text-amber uppercase">
+              Ascenso a los sabores
+            </h2>
+            <p className="mt-8 font-display text-[clamp(1.6rem,1.1rem+1.8vw,2.5rem)] leading-snug text-foreground">
+              En el corazón de la Ciudad del Sol, donde el cielo y la tierra se encuentran, nace
+              RITO: un santuario donde los sabores y las sensaciones se entrelazan.
+            </p>
+            <p className="mx-auto mt-7 max-w-xl text-lead text-muted-foreground">
+              Nuestro emblema, el sol con un ojo, nace del Templo del Sol muisca de Sogamoso. RITO
+              es un viaje, un tributo al arte de vivir y compartir: cada momento, un ritual.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
@@ -142,7 +166,7 @@ export function AboutPage() {
           <Reveal className="mx-auto max-w-2xl text-center">
             <Sol className="mx-auto size-10 text-accent" girando />
             <h2 className="mt-7 font-display text-h2 text-foreground">
-              Un lugar, <em className="texto-laton">muchos planes</em>
+              Experiencias <em className="texto-laton">en lo alto</em>
             </h2>
           </Reveal>
 

@@ -4,7 +4,7 @@ import { Reveal } from '@/components/motion/Reveal'
 import { ArrowLink } from '@/components/ui/ArrowLink'
 import { Container } from '@/components/ui/Container'
 import { Eyebrow } from '@/components/ui/Eyebrow'
-import { menu } from '@/features/menu/menu'
+import { carta } from '@/features/menu/menu'
 
 /**
  * Lo que se sirve: las categorías de la carta como un índice elegante sobre el muro de
@@ -21,8 +21,8 @@ export function LoQueSeSirve() {
               Lo que <em className="texto-laton">se sirve</em> arriba
             </h2>
             <p className="mt-6 max-w-sm text-lead text-muted-foreground">
-              Cócteles únicos, cortes con sello propio, vino para descorchar y ediciones de
-              temporada.
+              Cortes madurados al fuego, burgers, sabores mexicanos, postres y una barra donde cada
+              cóctel es un rito.
             </p>
             <ArrowLink to="/menu" tono="amber" className="mt-9">
               Ver la carta
@@ -30,7 +30,7 @@ export function LoQueSeSirve() {
           </Reveal>
 
           <ol className="border-t border-border">
-            {menu.map((categoria, i) => (
+            {carta.map((categoria, i) => (
               <li key={categoria.id}>
                 <Reveal delay={i * 0.05}>
                   <Link
@@ -38,7 +38,9 @@ export function LoQueSeSirve() {
                     className="group relative flex items-center gap-6 overflow-hidden border-b border-border py-7 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber sm:gap-10 sm:py-9"
                   >
                     <img
-                      src={categoria.imagen.replace('.webp', '-sm.webp')}
+                      src={categoria.imagen
+                        .replace('-1600.webp', '-800.webp')
+                        .replace(/^\/images\/(.+)\.webp$/, '/images/$1-sm.webp')}
                       alt=""
                       aria-hidden="true"
                       loading="lazy"
@@ -52,10 +54,10 @@ export function LoQueSeSirve() {
                     </span>
                     <span className="flex-1">
                       <span className="block font-display text-h3 text-foreground transition-transform duration-500 ease-luxe group-hover:translate-x-2 motion-reduce:group-hover:translate-x-0">
-                        {categoria.title}
+                        {categoria.titulo}
                       </span>
                       <span className="mt-1 block text-sm text-muted-foreground">
-                        {categoria.intro}
+                        {categoria.frase}
                       </span>
                     </span>
                     <ArrowUpRight

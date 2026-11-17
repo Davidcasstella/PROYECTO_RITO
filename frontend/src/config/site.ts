@@ -5,7 +5,9 @@
  *  - Nombre, descripción y estilo: perfil de Instagram @ritorooftop.
  *  - WhatsApp y reglas de reserva: el enlace de reservas del perfil (shorturl.at/PdZPi), que
  *    abre WhatsApp con la plantilla del restaurante.
- *  - Dirección y horario: ficha de Google Maps "RITO Rooftop".
+ *  - Dirección, horario, correo y Facebook: web oficial ritogastrobar.com (más reciente que
+ *    la ficha de Google Maps, que todavía dice Cra. 10 #12-14).
+ *  - Nombre "RITO · Cocina Rooftop", lema y textos de la casa: la carta en PDF del cliente.
  *
  * Lo que sigue entre corchetes no se ha facilitado: se muestra tal cual y la web desactiva
  * sola lo que no se puede hacer sin ese dato.
@@ -19,11 +21,13 @@ export type Pending = `[${string}]`
 export const siteConfig = {
   name: 'Rito',
   nameUpper: 'RITO',
-  tagline: 'Rooftop · Gastrobar',
+  tagline: 'Cocina Rooftop',
   description:
-    'RITO Rooftop, gastrobar y terraza en Sogamoso: cócteles de autor, cortes, vinos y atardeceres sobre la plaza. Reserva tu mesa por WhatsApp.',
+    'RITO Cocina Rooftop en Sogamoso: cortes, cocina de fuego, burgers, cócteles de autor y la terraza sobre la plaza. Mira la carta, los platos en 3D y reserva por WhatsApp.',
   /** Frase de marca, la del perfil de Instagram. */
   lema: 'Cócteles únicos, buena vibra y atardeceres mágicos en Sogamoso.',
+  /** Frase de la web oficial. */
+  firma: 'Cada experiencia es un nuevo rito.',
 
   /** URL pública, para las etiquetas de compartir. Se cambia al tener dominio propio. */
   url: 'https://proyecto-rito.vercel.app',
@@ -41,20 +45,22 @@ export const siteConfig = {
   reservasHref: '/reservas',
 
   contact: {
-    address: 'Cra. 10 #12-14',
+    address: 'Carrera 10 # 12-08, piso 3',
     city: 'Sogamoso, Boyacá',
     /** Para buscar en el mapa. */
-    direccionCompleta: 'RITO Rooftop, Cra. 10 #12-14, Sogamoso, Boyacá, Colombia',
+    direccionCompleta: 'RITO Rooftop, Carrera 10 # 12-08, Sogamoso, Boyacá, Colombia',
     /** Coordenadas de la ficha de Google Maps. */
     lat: 5.7151016,
     lng: -72.9269093,
     phone: '320 397 3011',
     /** Solo dígitos, para los enlaces `tel:` y `wa.me`. Colombia es +57. */
     phoneE164: NEGOCIO.whatsapp,
-    email: '[Correo del restaurante]' as Pending,
+    email: 'contacto@ritogastrobar.com',
     instagram: 'https://www.instagram.com/ritorooftop/',
     instagramUser: '@ritorooftop',
-    facebook: '[Facebook]' as Pending,
+    facebook: 'https://www.facebook.com/ritorooftop',
+    /** Web oficial del restaurante. */
+    web: 'https://ritogastrobar.com/',
   },
 
   /** Año del aviso de derechos del pie de página. */

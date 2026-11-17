@@ -3,7 +3,7 @@ import { estadoAhora, type EstadoLocal } from '@/shared/horario'
 import { cn } from '@/lib/cn'
 
 /**
- * "Abierto · cierra a las 11:00 p. m.", calculado con la hora de Sogamoso aunque el
+ * "Abierto · cierra a la medianoche", calculado con la hora de Sogamoso aunque el
  * visitante esté en otra zona horaria. Se recalcula cada minuto.
  */
 export function EstadoAhora({ className }: { className?: string }) {

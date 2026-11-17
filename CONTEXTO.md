@@ -25,8 +25,7 @@ Consultado el 17 de noviembre de 2026:
 | Dirección Cra. 10 #12-14 y horario                                                     | Ficha de Google Maps "RITO Rooftop"                                          |
 | Fotos                                                                                  | Carpeta `Escritorio/Para_proyec_Nuevos/PROYECTO_RITO` del usuario (20 fotos) |
 
-**Pendiente del cliente**: platos y precios de la carta, correo, Facebook, videos para el
-recorrido por scroll. Las dos fotos donde salen personas de frente (selfie en el espejo) no se
+**Pendiente del cliente**: videos propios para el recorrido por scroll y escaneos 3D reales. Las dos fotos donde salen personas de frente (selfie en el espejo) no se
 usan.
 
 ## Las páginas
@@ -114,3 +113,21 @@ restaurante italiano. Cuando lleguen:
   - Flujo de reserva probado en Chrome: errores junto a cada campo, horas válidas, mensaje
     final con la plantilla del restaurante. Menú móvil y anclas de la carta probados.
   - Pendiente: carta con platos y precios, videos, correo y Facebook.
+
+- 2026-11-17 (2): **carta completa, platos en 3D y material de la web oficial**.
+  - Marca actualizada a "RITO · Cocina Rooftop" con el sol con ojo de la carta.
+  - Datos de la web oficial: Carrera 10 # 12-08 piso 3, horario lun–jue 10 a. m.–medianoche,
+    vie–sáb 10 a. m.–2 a. m., dom 12 m.–10 p. m.; correo y Facebook.
+  - Carta del PDF entera: 4 grupos, ~20 secciones, platos con opciones y recomendados,
+    listas de bebidas y tabla de licores (shot/media/botella). Botón para bajar el PDF.
+  - "La carta en 3D" (`features/modelos3d/ExperienciaPlatos3D.tsx`) en Inicio y en la carta:
+    8 modelos de muestra con nombre, descripción y precio reales (churrasco, Burger La Plena,
+    parrillada, costillas, pechuga napolitana, pasta marinera, vegano al Rito, canastas de
+    patacón). Girar, acercar, pantalla completa, flechas/teclado y "Ver en mi mesa" (AR).
+    Desde cada tarjeta de la carta, "Ver en 3D".
+  - Fotos (10) y videos (4) de ritogastrobar.com cargados desde esa web, con respaldo local:
+    video de la terraza en la portada (solo pantallas grandes), sección "Vive el rito",
+    categoría "Cocina y barra" en la galería, fotos en platos de la carta.
+  - **Pendiente**: comprobar en producción que ritogastrobar.com deja cargar sus fotos y
+    videos desde otra web; si no, descargarlos a `frontend/public/rito/` y cambiar `ORIGEN`
+    en `features/media/media.ts`.

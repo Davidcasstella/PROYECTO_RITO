@@ -7,9 +7,9 @@ type SolProps = {
 }
 
 /**
- * El sol de latón que corona el logo en el muro de RITO: un disco con un aro de rayos en
- * punta, alternando largos y cortos. Dibujado en SVG para que escale sin perder nitidez
- * y tome el color del texto que lo rodea.
+ * El emblema de RITO: el sol de la "Ciudad del Sol" con un ojo en el centro, como en la carta
+ * y en el muro del local. Rayos en punta, alternando largos y cortos, y un ojo almendrado
+ * calado en el disco. SVG propio: escala sin perder nitidez y toma el color del texto.
  */
 export function Sol({ className, girando }: SolProps) {
   const rayos = Array.from({ length: 24 }, (_, i) => i)
@@ -29,7 +29,7 @@ export function Sol({ className, girando }: SolProps) {
           return (
             <path
               key={i}
-              d={`M -4 -14 L 0 -${largo} L 4 -14 Z`}
+              d={`M -4.2 -15 L 0 -${largo} L 4.2 -15 Z`}
               transform={`rotate(${i * 15})`}
               opacity={i % 2 === 0 ? 1 : 0.75}
             />

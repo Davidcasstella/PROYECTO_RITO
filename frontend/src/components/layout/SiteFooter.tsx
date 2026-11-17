@@ -118,7 +118,7 @@ export function SiteFooter() {
 
       <Container className="flex flex-wrap items-center justify-between gap-4 border-t border-border py-6">
         <p className="text-sm text-muted-foreground/80">
-          © {siteConfig.year} RITO Rooftop · Gastrobar & Terraza · Sogamoso
+          © {siteConfig.year} RITO · Cocina Rooftop · Sogamoso, la Ciudad del Sol
         </p>
         <p className="max-w-md text-xs text-muted-foreground/70">
           El exceso de alcohol es perjudicial para la salud. Prohíbase el expendio de bebidas

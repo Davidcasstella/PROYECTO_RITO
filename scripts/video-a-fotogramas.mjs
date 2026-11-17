@@ -6,56 +6,52 @@
 //   node scripts/video-a-fotogramas.mjs originales/entrada.mp4 entrada
 //
 // Deja los archivos en frontend/public/frames/<nombre>/{lg,sm}/0001.webp…
-import { execFileSync } from "node:child_process";
-import { mkdirSync, readdirSync, rmSync } from "node:fs";
-import path from "node:path";
+import { execFileSync } from 'node:child_process'
+import { mkdirSync, readdirSync, rmSync } from 'node:fs'
+import path from 'node:path'
 
-const [video, nombre = "entrada"] = process.argv.slice(2);
+const [video, nombre = 'entrada'] = process.argv.slice(2)
 if (!video) {
-  console.error(
-    "Uso: node scripts/video-a-fotogramas.mjs <video.mp4> [nombre]",
-  );
-  process.exit(1);
+  console.error('Uso: node scripts/video-a-fotogramas.mjs <video.mp4> [nombre]')
+  process.exit(1)
 }
 
 const duracion = Number(
-  execFileSync("ffprobe", [
-    "-v",
-    "error",
-    "-show_entries",
-    "format=duration",
-    "-of",
-    "csv=p=0",
+  execFileSync('ffprobe', [
+    '-v',
+    'error',
+    '-show_entries',
+    'format=duration',
+    '-of',
+    'csv=p=0',
     video,
   ])
     .toString()
     .trim(),
-);
+)
 
 for (const { clave, ancho, cuantos, calidad } of [
-  { clave: "lg", ancho: 1280, cuantos: 240, calidad: 62 },
-  { clave: "sm", ancho: 820, cuantos: 120, calidad: 56 },
+  { clave: 'lg', ancho: 1280, cuantos: 240, calidad: 62 },
+  { clave: 'sm', ancho: 820, cuantos: 120, calidad: 56 },
 ]) {
-  const destino = path.join("frontend", "public", "frames", nombre, clave);
-  rmSync(destino, { recursive: true, force: true });
-  mkdirSync(destino, { recursive: true });
+  const destino = path.join('frontend', 'public', 'frames', nombre, clave)
+  rmSync(destino, { recursive: true, force: true })
+  mkdirSync(destino, { recursive: true })
   // Fotogramas repartidos por igual a lo largo de todo el video.
-  execFileSync("ffmpeg", [
-    "-v",
-    "error",
-    "-i",
+  execFileSync('ffmpeg', [
+    '-v',
+    'error',
+    '-i',
     video,
-    "-vf",
+    '-vf',
     `fps=${cuantos / duracion},scale=${ancho}:-2`,
-    "-frames:v",
+    '-frames:v',
     String(cuantos),
-    "-c:v",
-    "libwebp",
-    "-quality",
+    '-c:v',
+    'libwebp',
+    '-quality',
     String(calidad),
-    path.join(destino, "%04d.webp"),
-  ]);
-  console.log(
-    `${clave}: ${readdirSync(destino).length} fotogramas en ${destino}`,
-  );
+    path.join(destino, '%04d.webp'),
+  ])
+  console.log(`${clave}: ${readdirSync(destino).length} fotogramas en ${destino}`)
 }

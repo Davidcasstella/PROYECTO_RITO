@@ -19,7 +19,7 @@ export function ContactoPage() {
   useDocumentMeta({
     title: `Contacto · ${siteConfig.nameUpper} Rooftop`,
     description:
-      'Cómo llegar a RITO Rooftop: Cra. 10 #12-14, Sogamoso. Horario, WhatsApp 320 397 3011 e Instagram @ritorooftop.',
+      'Cómo llegar a RITO Cocina Rooftop: Carrera 10 # 12-08, piso 3, Sogamoso. Horario, WhatsApp 320 397 3011, correo e Instagram @ritorooftop.',
   })
 
   return (

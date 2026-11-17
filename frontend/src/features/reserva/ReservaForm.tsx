@@ -27,7 +27,7 @@ type Listo = { whatsappUrl: string; codigo: string }
  * Formulario de reserva.
  *
  * Pide lo mismo que la plantilla de WhatsApp del restaurante (fecha, hora, nombre, celular
- * y personas) y solo ofrece horas reservables: de 12:00 m. a 8:00 p. m., y si es hoy, las
+ * y personas) y solo ofrece horas reservables: desde la apertura hasta las 8:00 p. m., y si es hoy, las
  * que aún no han pasado. Al enviar, el servidor vuelve a validar y devuelve el mensaje
  * listo para mandar por WhatsApp, que es donde RITO confirma las mesas.
  */

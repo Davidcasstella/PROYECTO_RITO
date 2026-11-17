@@ -7,14 +7,14 @@
  * (consultados el 17 de noviembre de 2026).
  */
 export const NEGOCIO = {
-  nombre: "RITO Rooftop",
-  zonaHoraria: "America/Bogota",
+  nombre: 'RITO Rooftop',
+  zonaHoraria: 'America/Bogota',
   /** WhatsApp de reservas, solo dígitos y con el prefijo de Colombia. */
-  whatsapp: "573203973011",
+  whatsapp: '573203973011',
   /** "Las reservaciones se reciben hasta las 8:00 PM". */
-  horaLimiteReserva: "20:00",
+  horaLimiteReserva: '20:00',
   /** "…se tiene un tiempo de 25 minutos para llegar, de lo contrario perderás la reserva." */
   toleranciaMinutos: 25,
   /** Grupos más grandes se hablan directamente por WhatsApp. */
   maxPersonas: 40,
-} as const;
+} as const

@@ -4,7 +4,7 @@ import { ArrowLink } from '@/components/ui/ArrowLink'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 
 const cifras = [
-  { valor: '12 m.', texto: 'abrimos todos los días' },
+  { valor: '10 a. m.', texto: 'abrimos de lunes a sábado' },
   { valor: '2', texto: 'ambientes: salón y terraza' },
   { valor: '2 a. m.', texto: 'cierre de viernes y sábado' },
 ]
@@ -30,7 +30,7 @@ export function Ritual() {
 
         <div className="flex items-center px-5 py-16 sm:px-10 lg:py-24 xl:px-20">
           <Reveal from="up" className="max-w-lg">
-            <Eyebrow>Gastrobar &amp; terraza</Eyebrow>
+            <Eyebrow>Cocina &amp; terraza</Eyebrow>
 
             <h2 className="mt-7 font-display text-h2">
               Un ritual que <em>se sube</em> por las escaleras
