@@ -1,0 +1,5 @@
+# Qué NO se sube a Vercel: material de origen y herramientas de desarrollo.
+originales
+scripts
+*.mp4
+node_modules

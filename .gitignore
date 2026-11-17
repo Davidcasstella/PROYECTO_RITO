@@ -1,0 +1,21 @@
+node_modules
+dist
+*.local
+
+# Credenciales y configuración de despliegue: nunca al repositorio
+.env*
+!.env.example
+.vercel
+
+# Editor y sistema
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.log
+
+# Material original pesado (fotos y videos tal como los entrega el cliente).
+# La web usa las versiones optimizadas de frontend/public.
+/originales/
+*.mp4
+*.mov

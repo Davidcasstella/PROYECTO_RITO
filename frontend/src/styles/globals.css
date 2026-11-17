@@ -1,0 +1,233 @@
+@import 'tailwindcss';
+
+/*
+ * Sistema de diseño de RITO · Rooftop Gastrobar (Sogamoso).
+ * Sale de las fotos del local: la pared de listones negros con vetas doradas, las letras y
+ * el sol de latón del logo, los sofás de cuero coñac y el cielo abierto de la terraza.
+ * Si cambia la marca, se cambia SOLO aquí: los componentes usan los nombres (bg-accent,
+ * text-sun, bg-marmol…), nunca colores sueltos.
+ */
+@theme {
+  --font-display: 'Cormorant Garamond Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Jost Variable', ui-sans-serif, system-ui, sans-serif;
+  /* El acento "a mano" se hace con la cursiva de la serif: no hace falta otra fuente. */
+  --font-script: 'Cormorant Garamond Variable', ui-serif, Georgia, serif;
+
+  /*
+   * Escala tipográfica fluida. Cormorant es una serif fina y alta: se usa grande, con poco
+   * interlineado; las etiquetas van en Jost, en versales muy abiertas, como el "GASTROBAR"
+   * del logo.
+   */
+  --text-eyebrow: 0.72rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.34em;
+  --text-eyebrow--font-weight: 500;
+
+  --text-display: clamp(3rem, 1.1rem + 6.4vw, 6.75rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.015em;
+
+  --text-h2: clamp(2.35rem, 1.2rem + 3.8vw, 4.5rem);
+  --text-h2--line-height: 1.02;
+  --text-h2--letter-spacing: -0.012em;
+
+  --text-h3: clamp(1.55rem, 1.25rem + 0.95vw, 2.1rem);
+  --text-h3--line-height: 1.12;
+  --text-h3--letter-spacing: -0.005em;
+
+  --text-lead: clamp(1.05rem, 0.97rem + 0.35vw, 1.22rem);
+  --text-lead--line-height: 1.65;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.7;
+
+  /* Negro de los listones: fondo general. */
+  --color-background: #0b0a08;
+  --color-surface: #16130e;
+  --color-foreground: #f4eee3;
+  --color-muted-foreground: #c8bead;
+  --color-border: rgb(244 238 227 / 0.14);
+
+  /* Mármol claro del piso: secciones claras. Tinta encima, 16:1. */
+  --color-marmol: #efe9de;
+  --color-marmol-deep: #e4dccd;
+  --color-ink: #15110b;
+  --color-ink-muted: #51483a;
+
+  /*
+   * Latón del logo: acciones y acentos.
+   * Fondo de botón con tinta negra encima (9,4:1). Para texto sobre mármol se usa
+   * accent-ink (6,6:1), porque el latón claro no se lee sobre fondo claro.
+   */
+  --color-accent: #c9a24b;
+  --color-accent-hover: #dcb862;
+  --color-accent-foreground: #120e08;
+  --color-accent-ink: #7a5a18;
+
+  /* Cuero coñac de los sofás: paneles cálidos. Marfil encima, 12:1. */
+  --color-cuero: #2a1911;
+  --color-cuero-soft: #3a2418;
+
+  /* Coñac y cobre: detalles. */
+  --color-terracotta: #9c5f37;
+  --color-copper: #b87333;
+
+  /* Sol: el brillo del latón sobre negro, para etiquetas y números. 10:1 sobre el fondo. */
+  --color-amber: #e3c171;
+  --color-amber-deep: #7a5a18;
+
+  /* Errores de formulario sobre fondo oscuro: coral suave, 8,9:1. */
+  --color-error: #f4a291;
+
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Cambio de página: un fundido corto, sin cortina. */
+  @keyframes pagina {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Visor de fotos: la nueva entra por el lado hacia el que se avanza. */
+  @keyframes foto-desde-derecha {
+    from {
+      opacity: 0;
+      transform: translateX(8%) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  @keyframes foto-desde-izquierda {
+    from {
+      opacity: 0;
+      transform: translateX(-8%) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  /* Fotos de cabecera: se asientan despacio desde un ligero acercamiento. */
+  @keyframes acercar {
+    from {
+      transform: scale(1.12);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  /* El sol del logo gira muy despacio: se nota que está vivo, no distrae. */
+  @keyframes sol-girar {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Un reflejo que cruza las letras de latón, como la luz sobre el logo del muro. */
+  @keyframes brillo {
+    from {
+      background-position: 200% 50%;
+    }
+    to {
+      background-position: -200% 50%;
+    }
+  }
+
+  /* Entrada de las ventanas modales. */
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    @apply bg-background font-sans text-body text-foreground antialiased;
+    /* Los anclajes no quedan tapados por el header fijo. */
+    scroll-padding-top: 6rem;
+  }
+
+  /*
+   * Lenis mueve el scroll por JS; sin esto el navegador haría además su propio salto
+   * suave y las dos animaciones pelearían.
+   */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  ::selection {
+    @apply bg-amber text-ink;
+  }
+}
+
+@layer utilities {
+  /* Números tabulares en precios: las columnas quedan alineadas. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Oculto en pantalla, visible para lectores de pantalla y al recibir el foco. */
+  .skip-link {
+    @apply sr-only;
+  }
+
+  .skip-link:focus {
+    @apply not-sr-only fixed top-4 left-4 z-100 rounded-sm bg-accent px-5 py-3 text-eyebrow text-accent-foreground uppercase;
+  }
+}
+
+@layer utilities {
+  /*
+   * Texto de latón: degradado cálido con un reflejo que pasa despacio. Solo para palabras
+   * sueltas en títulos grandes sobre fondo oscuro (el contraste mínimo del degradado es 7:1).
+   */
+  .texto-laton {
+    background-image: linear-gradient(
+      100deg,
+      #b38a35 0%,
+      #e9cf86 22%,
+      #c9a24b 40%,
+      #f3e2ad 50%,
+      #c9a24b 60%,
+      #a07a2c 100%
+    );
+    background-size: 300% 100%;
+    background-clip: text;
+    color: transparent;
+    animation: brillo 9s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .texto-laton {
+      animation: none;
+      background-position: 50% 50%;
+    }
+  }
+
+  /* Vetas doradas del muro del logo, dibujadas con CSS (sin imagen) para fondos oscuros. */
+  .listones {
+    background-color: var(--color-background);
+    background-image:
+      repeating-linear-gradient(90deg, rgb(255 255 255 / 0.035) 0 1px, transparent 1px 22px),
+      linear-gradient(118deg, transparent 47.6%, rgb(201 162 75 / 0.09) 48%, transparent 48.5%),
+      linear-gradient(104deg, transparent 71.8%, rgb(201 162 75 / 0.06) 72%, transparent 72.3%),
+      linear-gradient(132deg, transparent 22.8%, rgb(201 162 75 / 0.05) 23%, transparent 23.3%);
+  }
+}
