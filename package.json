@@ -9,7 +9,7 @@
     "dev": "npm run dev --workspace frontend",
     "build": "npm run build --workspace frontend",
     "check": "npm run check --workspace frontend && npm run typecheck:api",
-    "typecheck:api": "tsc -p api/tsconfig.json",
+    "typecheck:api": "tsc -p tsconfig.api.json",
     "test": "npm run test --workspace frontend"
   },
   "engines": {

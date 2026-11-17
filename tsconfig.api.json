@@ -10,6 +10,6 @@
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": ["./*.ts", "../shared/*.ts"],
-  "exclude": ["../shared/*.test.ts"]
+  "include": ["api/*.ts", "shared/*.ts"],
+  "exclude": ["shared/*.test.ts"]
 }
